@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Dual Time Zone Clock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,15 +49,35 @@
                 flex-direction: row; /* Horizontal split for wider screens */
             }
         }
+
+        .accessibility-controls {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #DDD;
+            z-index: 1000;
+        }
+
+        .accessibility-controls button {
+            margin-right: 5px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <div class="time-container">
-        <div id="newDelhi" class="time-zone">
+    <div class="accessibility-controls">
+        <button onclick="decreaseFontSize()">A-</button>
+        <button onclick="increaseFontSize()">A+</button>
+    </div>
+    <div class="time-container" aria-live="polite">
+        <div id="newDelhi" class="time-zone" aria-label="Time in New Delhi">
             <h2>New Delhi</h2>
             <div class="time"></div>
         </div>
-        <div id="newYork" class="time-zone">
+        <div id="newYork" class="time-zone" aria-label="Time in New York">
             <h2>New York</h2>
             <div class="time"></div>
         </div>
@@ -73,6 +93,24 @@
 
             document.getElementById('newDelhi').className = newDelhiTime.includes('PM') ? 'time-zone dark-background' : 'time-zone light-background';
             document.getElementById('newYork').className = newYorkTime.includes('PM') ? 'time-zone dark-background' : 'time-zone light-background';
+        }
+
+        function increaseFontSize() {
+            var elements = document.querySelectorAll('.time-zone');
+            for (var i = 0; i < elements.length; i++) {
+                var style = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
+                var fontSize = parseFloat(style);
+                elements[i].style.fontSize = (fontSize + 5) + 'px';
+            }
+        }
+
+        function decreaseFontSize() {
+            var elements = document.querySelectorAll('.time-zone');
+            for (var i = 0; i < elements.length; i++) {
+                var style = window.getComputedStyle(elements[i], null).getPropertyValue('font-size');
+                var fontSize = parseFloat(style);
+                elements[i].style.fontSize = (fontSize - 5) + 'px';
+            }
         }
 
         setInterval(updateTimes, 1000);
