@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dual Time Zone Clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .time-container {
+            display: flex;
+            flex-direction: column; /* Default to vertical */
+            height: 100%;
+        }
+
+        .time-zone {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 80px; /* Larger font size */
+            border: 5px solid black; /* Thick border */
+        }
+
+        .time-zone h2 {
+            margin: 0;
+            font-size: 50px; /* Large font for location name */
+            font-weight: normal;
+        }
+
+        .dark-background {
+            background-color: #333;
+        }
+
+        .light-background {
+            background-color: #DDD;
+            color: black;
+        }
+
+        /* Media Query for wider screens */
+        @media (min-width: 600px) {
+            .time-container {
+                flex-direction: row; /* Horizontal split for wider screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="time-container">
+        <div id="newDelhi" class="time-zone">
+            <h2>New Delhi</h2>
+            <div class="time"></div>
+        </div>
+        <div id="newYork" class="time-zone">
+            <h2>New York</h2>
+            <div class="time"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateTimes() {
+            var newDelhiTime = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit' });
+            var newYorkTime = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: true, hour: '2-digit', minute: '2-digit' });
+
+            document.querySelector('#newDelhi .time').textContent = newDelhiTime.replace(/ AM| PM/, '');
+            document.querySelector('#newYork .time').textContent = newYorkTime.replace(/ AM| PM/, '');
+
+            document.getElementById('newDelhi').className = newDelhiTime.includes('PM') ? 'time-zone dark-background' : 'time-zone light-background';
+            document.getElementById('newYork').className = newYorkTime.includes('PM') ? 'time-zone dark-background' : 'time-zone light-background';
+        }
+
+        setInterval(updateTimes, 1000);
+        updateTimes();
+    </script>
+</body>
+</html>
