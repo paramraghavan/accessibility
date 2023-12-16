@@ -46,9 +46,16 @@
         /* Media Query for wider screens */
         @media (min-width: 600px) {
             .time-container {
+                // do nothing
+            }
+        }
+
+        @media (aspect-ratio: 16/9)) {
+            .time-container {
                 flex-direction: row; /* Horizontal split for wider screens */
             }
         }
+
 
         .accessibility-controls {
             position: fixed;
@@ -130,6 +137,46 @@
                 elements[i].style.fontSize = (fontSize - 5) + 'px';
             }
         }
+
+        // script for touch zooming start
+            let scale = 1;
+            const ZOOM_SPEED = 0.01;
+
+            function setupZoom(elementId) {
+                const el = document.getElementById(elementId);
+                let startDistance = null;
+
+                el.addEventListener('touchmove', function(e) {
+                    if (e.touches.length == 2) {
+                        e.preventDefault();
+
+                        const distance = getDistanceBetweenTouches(e);
+                        if (startDistance === null) {
+                            startDistance = distance;
+                        } else {
+                            scale *= 1 + ZOOM_SPEED * (distance - startDistance);
+                            el.style.transform = `scale(${scale})`;
+                            startDistance = distance;
+                        }
+                    }
+                }, { passive: false });
+
+                el.addEventListener('touchend', function() {
+                    startDistance = null;
+                });
+            }
+
+            function getDistanceBetweenTouches(e) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                return Math.sqrt(Math.pow(touch2.pageX - touch1.pageX, 2) + Math.pow(touch2.pageY - touch1.pageY, 2));
+            }
+
+            // Setup zoom for both time zones
+            setupZoom('newDelhi');
+            setupZoom('newYork');
+        // script for touch zooming end
+
 
         setInterval(updateTimes, 1000);
         updateTimes();
