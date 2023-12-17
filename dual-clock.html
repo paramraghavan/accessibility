@@ -37,7 +37,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 190px; /* Larger font size */
+            font-size: 100px; /* Larger font size */
             border: 5px solid black; /* Thick border */
         }
 
@@ -56,18 +56,123 @@
             color: black;
         }
 
-        /* Media Query for wider screens */
-        @media (min-width: 600px) {
-            .time-container {
-                // do nothing
-            }
-        }
+<!--        /* Media Query for wider screens */-->
+<!--        @media (min-width: 600px) {-->
+<!--            .time-container {-->
+<!--                // do nothing-->
+<!--            }-->
+<!--        }-->
 
-        @media (aspect-ratio: 16/9)) {
-            .time-container {
-                flex-direction: row; /* Horizontal split for wider screens */
-            }
-        }
+<!--        @media (aspect-ratio: 16/9)) {-->
+<!--            .time-container {-->
+<!--                flex-direction: row; /* Horizontal split for wider screens */-->
+<!--            }-->
+<!--        }-->
+
+
+// media query start
+/* Base styles go here - these apply to all viewports unless overridden */
+body, html {
+  /* ... existing styles ... */
+}
+
+.time-container {
+  /* ... existing styles ... */
+}
+
+.time-zone {
+  /* ... existing styles ... */
+  font-size: 9vw; /* Use viewport width for scalable font size */
+}
+
+.time-zone h2 {
+  /* ... existing styles ... */
+  font-size: 4.5vw;
+}
+
+.dark-background {
+  /* ... existing styles ... */
+}
+
+.light-background {
+  /* ... existing styles ... */
+}
+
+.accessibility-controls {
+  /* ... existing styles ... */
+}
+
+.accessibility-controls button {
+  /* ... existing styles ... */
+}
+
+/* Media Query for smaller screens (mobile phones) */
+@media only screen and (max-width: 599px) {
+  .time-container {
+    flex-direction: column; /* Stack time zones vertically */
+  }
+
+  .time-zone {
+    font-size: 18vw; /* Larger font size for smaller screens */
+  }
+
+  .time-zone h2 {
+    font-size: 9vw;
+  }
+}
+
+/* Media Query for medium screens (tablets in portrait and landscape) */
+@media only screen and (min-width: 600px) and (max-width: 899px) {
+  .time-container {
+    flex-direction: row; /* Side by side time zones */
+  }
+
+  .time-zone {
+    font-size: 200px;
+  }
+
+  .time-zone h2 {
+    font-size: 100px;
+  }
+}
+
+/* Media Query for large screens (desktops) */
+@media only screen and (min-width: 900px) {
+  .time-container {
+    flex-direction: row;
+  }
+
+  .time-zone {
+    font-size: 200px;
+  }
+
+  .time-zone h2 {
+    font-size: 100px;
+  }
+}
+
+/* Media Query for landscape orientation */
+@media only screen and (orientation: landscape) {
+  .time-container {
+    flex-direction: row;
+  }
+
+  /* Adjustments for landscape mode */
+  .time-zone {
+    font-size: 200px;
+  }
+
+  .time-zone h2 {
+    font-size: 100px;
+  }
+}
+
+/* Media Query for high-resolution displays (Retina) */
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* High-resolution specific styles */
+}
+
+// media query end
 
 
         .accessibility-controls {
@@ -186,8 +291,8 @@
             }
 
             // Setup zoom for both time zones
-            setupZoom('newDelhi');
-            setupZoom('newYork');
+            //setupZoom('newDelhi');
+            //setupZoom('newYork');
         // script for touch zooming end
 
         // add speech start
