@@ -1,0 +1,16 @@
+{
+    "name": "DualClock",
+    "short_name": "DualClock",
+    "start_url": "http://localhost:63342/dual-clock/dual-clock.html?location1=Asia/Kolkata&location2=America/New_York",
+    "display": "standalone",
+    "background_color": "orange",
+    "theme_color": "orange",
+    "description": "This is  dual clock",
+    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
